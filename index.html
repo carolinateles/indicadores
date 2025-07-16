@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Desempenho Orçamentário</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .chart-container {
+            position: relative;
+            height: 350px;
+            width: 100%;
+            max-width: 450px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .methodology-table {
+            width: 100%;
+            margin-top: 12px;
+            font-size: 0.875rem;
+            border-collapse: collapse;
+        }
+        .methodology-table td {
+            padding: 8px 4px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .methodology-table tr:last-child td {
+             border-bottom: 0;
+        }
+        .methodology-table td:last-child {
+            text-align: right;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .sticky-nav {
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800">
+
+    <div class="container mx-auto">
+
+        <header class="text-center py-12 px-4">
+            <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-2">Painel de Desempenho Orçamentário</h1>
+            <p class="text-lg text-slate-600 max-w-3xl mx-auto">Metodologia de Pontuação e Análise de Indicadores (Base 100 Pontos)</p>
+        </header>
+
+        <nav class="sticky-nav bg-slate-100/80 backdrop-blur-md shadow-sm mb-12">
+            <div class="max-w-6xl mx-auto px-4">
+                <div class="flex justify-center items-center space-x-2 md:space-x-6 text-sm md:text-base">
+                    <a href="#eixo1" class="text-blue-700 font-semibold py-4 px-2 hover:text-blue-900 transition-colors">Eixo 1: Execução</a>
+                    <a href="#eixo2" class="text-purple-700 font-semibold py-4 px-2 hover:text-purple-900 transition-colors">Eixo 2: Créditos</a>
+                    <a href="#eixo3" class="text-teal-700 font-semibold py-4 px-2 hover:text-teal-900 transition-colors">Eixo 3: Passivos</a>
+                    <a href="#eixo4" class="text-amber-700 font-semibold py-4 px-2 hover:text-amber-900 transition-colors">Eixo 4: Sustentabilidade</a>
+                </div>
+            </div>
+        </nav>
+
+        <main class="px-4 md:px-8">
+            <section class="mb-20 bg-white p-8 rounded-2xl shadow-lg">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">Estrutura de Avaliação</h2>
+                <p class="max-w-3xl mx-auto text-slate-600 text-center mb-10">
+                    O sistema de avaliação de desempenho é construído sobre uma base de <strong>100 pontos</strong>, distribuídos igualmente em quatro eixos estratégicos. Cada eixo possui um peso de 25 pontos, garantindo uma análise equilibrada entre as diferentes dimensões da gestão orçamentária.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
+                    <div class="border-t-4 border-blue-500 bg-slate-50 p-6 rounded-lg">
+                        <h3 class="font-bold text-lg text-slate-800">Eixo 1: Execução</h3>
+                        <p class="text-3xl font-bold text-blue-600 mt-2">25,0</p>
+                        <p class="text-slate-500 text-sm">Pontos</p>
+                    </div>
+                     <div class="border-t-4 border-purple-500 bg-slate-50 p-6 rounded-lg">
+                        <h3 class="font-bold text-lg text-slate-800">Eixo 2: Créditos Adicionais</h3>
+                        <p class="text-3xl font-bold text-purple-600 mt-2">25,0</p>
+                         <p class="text-slate-500 text-sm">Pontos</p>
+                    </div>
+                     <div class="border-t-4 border-teal-500 bg-slate-50 p-6 rounded-lg">
+                        <h3 class="font-bold text-lg text-slate-800">Eixo 3: Passivos Anteriores</h3>
+                        <p class="text-3xl font-bold text-teal-600 mt-2">25,0</p>
+                         <p class="text-slate-500 text-sm">Pontos</p>
+                    </div>
+                     <div class="border-t-4 border-amber-500 bg-slate-50 p-6 rounded-lg">
+                        <h3 class="font-bold text-lg text-slate-800">Eixo 4: Sustentabilidade</h3>
+                        <p class="text-3xl font-bold text-amber-600 mt-2">25,0</p>
+                         <p class="text-slate-500 text-sm">Pontos</p>
+                    </div>
+                </div>
+            </section>
+    
+            <section id="eixo1" class="mb-20 pt-16 -mt-16">
+                <div class="text-center mb-10">
+                    <span class="text-sm font-semibold text-blue-600 bg-blue-100 py-1 px-3 rounded-full">Eixo 1</span>
+                    <h2 class="text-3xl font-bold mt-2 text-slate-900">Execução Orçamentária</h2>
+                    <p class="max-w-2xl mx-auto mt-2 text-slate-600">Avalia a eficiência na utilização dos recursos, desde o planejamento até a liquidação das despesas.</p>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                    <div class="bg-white p-6 rounded-2xl shadow-md">
+                        <h3 class="font-bold text-lg text-center mb-4 text-slate-800">Distribuição de Pontos no Eixo</h3>
+                        <div class="chart-container"><canvas id="eixo1Chart"></canvas></div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                            <div class="flex justify-between items-baseline"><h3 class="font-bold text-lg text-slate-800">1.1 Empenho s/ Dotação</h3><span class="font-bold text-blue-700 text-xl">8,0 Pts</span></div>
+                            <table class="methodology-table"><tbody><tr><td>Desempenho ≥ 80%</td><td>8,0 pts</td></tr><tr><td>Desempenho 60% - 79,9%</td><td>6,0 pts</td></tr><tr><td>Desempenho 30% - 59,9%</td><td>1,0 pt</td></tr><tr><td>Desempenho < 30%</td><td>0 pts</td></tr></tbody></table>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                            <div class="flex justify-between items-baseline"><h3 class="font-bold text-lg text-slate-800">1.2 Liquidação s/ Dotação</h3><span class="font-bold text-blue-700 text-xl">9,0 Pts</span></div>
+                            <table class="methodology-table"><tbody><tr><td>Desempenho ≥ 90%</td><td>9,0 pts</td></tr><tr><td>Desempenho 80% - 89,9%</td><td>7,0 pts</td></tr><tr><td>Desempenho 60% - 79,9%</td><td>4,0 pts</td></tr><tr><td>Desempenho < 60%</td><td>0 pts</td></tr></tbody></table>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                            <div class="flex justify-between items-baseline"><h3 class="font-bold text-lg text-slate-800">1.3 Liquidação s/ Empenhos</h3><span class="font-bold text-blue-700 text-xl">8,0 Pts</span></div>
+                            <table class="methodology-table"><tbody><tr><td>Desempenho ≥ 95%</td><td>8,0 pts</td></tr><tr><td>Desempenho 85% - 94,9%</td><td>6,0 pts</td></tr><tr><td>Desempenho 70% - 84,9%</td><td>3,0 pts</td></tr><tr><td>Desempenho < 70%</td><td>0 pts</td></tr></tbody></table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    
+            <section id="eixo2" class="mb-20 pt-16 -mt-16">
+                <div class="text-center mb-10">
+                     <span class="text-sm font-semibold text-purple-600 bg-purple-100 py-1 px-3 rounded-full">Eixo 2</span>
+                    <h2 class="text-3xl font-bold mt-2 text-slate-900">Créditos Adicionais</h2>
+                    <p class="max-w-2xl mx-auto mt-2 text-slate-600">Analisa a precisão do planejamento orçamentário e a gestão de ajustes e superávits.</p>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                     <div class="space-y-4 lg:order-2">
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                            <div class="flex justify-between items-baseline"><h3 class="font-bold text-lg text-slate-800">2.1 Expansão Orçamentária</h3><span class="font-bold text-purple-700 text-xl">8,0 Pts</span></div>
+                            <table class="methodology-table"><tbody><tr><td>Desempenho ≤ 5%</td><td>8,0 pts</td></tr><tr><td>Desempenho 5,1% - 10%</td><td>6,0 pts</td></tr><tr><td>Desempenho 10,1% - 15%</td><td>2,0 pts</td></tr><tr><td>Desempenho > 15%</td><td>0 pts</td></tr></tbody></table>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                            <div class="flex justify-between items-baseline"><h3 class="font-bold text-lg text-slate-800">2.2 Execução do Superávit</h3><span class="font-bold text-purple-700 text-xl">8,0 Pts</span></div>
+                            <table class="methodology-table"><tbody><tr><td>Desempenho ≥ 90%</td><td>8,0 pts</td></tr><tr><td>Desempenho 70% - 89,9%</td><td>6,0 pts</td></tr><tr><td>Desempenho 50% - 69,9%</td><td>3,0 pts</td></tr><tr><td>Desempenho < 50%</td><td>0 pts</td></tr></tbody></table>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                            <div class="flex justify-between items-baseline"><h3 class="font-bold text-lg text-slate-800">2.3 Evitabilidade de Créditos</h3><span class="font-bold text-purple-700 text-xl">9,0 Pts</span></div>
+                             <table class="methodology-table"><tbody><tr><td>Desempenho ≥ 80%</td><td>9,0 pts</td></tr><tr><td>Desempenho 60% - 79,9%</td><td>7,0 pts</td></tr><tr><td>Desempenho 40% - 59,9%</td><td>3,0 pts</td></tr><tr><td>Desempenho < 40%</td><td>0 pts</td></tr></tbody></table>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-md lg:order-1">
+                        <h3 class="font-bold text-lg text-center mb-4 text-slate-800">Distribuição de Pontos no Eixo</h3>
+                        <div class="chart-container"><canvas id="eixo2Chart"></canvas></div>
+                    </div>
+                </div>
+            </section>
+    
+            <section id="eixo3" class="mb-20 pt-16 -mt-16">
+                <div class="text-center mb-10">
+                    <span class="text-sm font-semibold text-teal-600 bg-teal-100 py-1 px-3 rounded-full">Eixo 3</span>
+                    <h2 class="text-3xl font-bold mt-2 text-slate-900">Passivos de Exercícios Anteriores</h2>
+                    <p class="max-w-2xl mx-auto mt-2 text-slate-600">Foca na gestão de dívidas e compromissos passados, como Restos a Pagar e Despesas de Exercícios Anteriores.</p>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                    <div class="bg-white p-6 rounded-2xl shadow-md">
+                        <h3 class="font-bold text-lg text-center mb-4 text-slate-800">Distribuição de Pontos no Eixo</h3>
+                         <div class="chart-container"><canvas id="eixo3Chart"></canvas></div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                            <div class="flex justify-between items-baseline"><h3 class="font-bold text-lg text-slate-800">3.1 Inscrição em RAP</h3><span class="font-bold text-teal-700 text-xl">8,0 Pts</span></div>
+                            <table class="methodology-table"><tbody><tr><td>Desempenho ≤ 5%</td><td>8,0 pts</td></tr><tr><td>Desempenho 5,1% - 10%</td><td>6,0 pts</td></tr><tr><td>Desempenho 10,1% - 15%</td><td>2,0 pts</td></tr><tr><td>Desempenho > 15%</td><td>0 pts</td></tr></tbody></table>
+                        </div>
+                         <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                            <div class="flex justify-between items-baseline"><h3 class="font-bold text-lg text-slate-800">3.2 Cancelamento de RAP</h3><span class="font-bold text-teal-700 text-xl">4,0 Pts</span></div>
+                            <table class="methodology-table"><tbody><tr><td>Desempenho ≤ 2%</td><td>4,0 pts</td></tr><tr><td>Desempenho 2,1% - 5%</td><td>2,0 pts</td></tr><tr><td>Desempenho > 5%</td><td>0 pts</td></tr></tbody></table>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                            <div class="flex justify-between items-baseline"><h3 class="font-bold text-lg text-slate-800">3.3 Pagamento de RAP</h3><span class="font-bold text-teal-700 text-xl">8,0 Pts</span></div>
+                            <table class="methodology-table"><tbody><tr><td>Desempenho ≥ 90%</td><td>8,0 pts</td></tr><tr><td>Desempenho 75% - 89,9%</td><td>6,0 pts</td></tr><tr><td>Desempenho 60% - 74,9%</td><td>3,0 pts</td></tr><tr><td>Desempenho < 60%</td><td>0 pts</td></tr></tbody></table>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                            <div class="flex justify-between items-baseline"><h3 class="font-bold text-lg text-slate-800">3.4 Impacto de DEA</h3><span class="font-bold text-teal-700 text-xl">5,0 Pts</span></div>
+                            <table class="methodology-table"><tbody><tr><td>Desempenho ≤ 3%</td><td>5,0 pts</td></tr><tr><td>Desempenho 3,1% - 6%</td><td>3,0 pts</td></tr><tr><td>Desempenho 6,1% - 9%</td><td>1,0 pt</td></tr><tr><td>Desempenho > 9%</td><td>0 pts</td></tr></tbody></table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    
+            <section id="eixo4" class="mb-20 pt-16 -mt-16">
+                <div class="text-center mb-10">
+                    <span class="text-sm font-semibold text-amber-600 bg-amber-100 py-1 px-3 rounded-full">Eixo 4</span>
+                    <h2 class="text-3xl font-bold mt-2 text-slate-900">Sustentabilidade Fiscal e Estratégica</h2>
+                    <p class="max-w-2xl mx-auto mt-2 text-slate-600">Examina a saúde financeira de longo prazo, a conformidade legal e a autonomia da gestão.</p>
+                </div>
+                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                     <div class="space-y-4 lg:order-2">
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                            <div class="flex justify-between items-baseline"><h3 class="font-bold text-lg text-slate-800">4.1 Pressão sobre Tesouro</h3><span class="font-bold text-amber-700 text-xl">10,0 Pts</span></div>
+                            <table class="methodology-table"><tbody><tr><td>Desempenho ≤ 10%</td><td>10,0 pts</td></tr><tr><td>Desempenho 10,1% - 20%</td><td>7,0 pts</td></tr><tr><td>Desempenho 20,1% - 30%</td><td>3,0 pts</td></tr><tr><td>Desempenho > 30%</td><td>0 pts</td></tr></tbody></table>
+                        </div>
+                         <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                            <div class="flex justify-between items-baseline"><h3 class="font-bold text-lg text-slate-800">4.2 Conformidade com LME</h3><span class="font-bold text-amber-700 text-xl">5,0 Pts</span></div>
+                            <table class="methodology-table"><tbody><tr><td>100% Conforme</td><td>5,0 pts</td></tr><tr><td>Parcialmente Conforme</td><td>2,0 pts</td></tr><tr><td>Não Conforme</td><td>0 pts</td></tr></tbody></table>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                            <div class="flex justify-between items-baseline"><h3 class="font-bold text-lg text-slate-800">4.3 Remanejamento Interno</h3><span class="font-bold text-amber-700 text-xl">5,0 Pts</span></div>
+                            <table class="methodology-table"><tbody><tr><td>Desempenho ≤ 5%</td><td>5,0 pts</td></tr><tr><td>Desempenho 5,1% - 15%</td><td>3,0 pts</td></tr><tr><td>Desempenho 15,1% - 25%</td><td>1,0 pt</td></tr><tr><td>Desempenho > 25%</td><td>0 pts</td></tr></tbody></table>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                            <div class="flex justify-between items-baseline"><h3 class="font-bold text-lg text-slate-800">4.4 Execução Rec. Próprios</h3><span class="font-bold text-amber-700 text-xl">2,5 Pts</span></div>
+                            <table class="methodology-table"><tbody><tr><td>Desempenho ≥ 90%</td><td>2,5 pts</td></tr><tr><td>Desempenho 70% - 89,9%</td><td>1,5 pts</td></tr><tr><td>Desempenho 50% - 69,9%</td><td>0,5 pts</td></tr><tr><td>Desempenho < 50%</td><td>0 pts</td></tr></tbody></table>
+                        </div>
+                         <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                            <div class="flex justify-between items-baseline"><h3 class="font-bold text-lg text-slate-800">4.5 Independência Financeira</h3><span class="font-bold text-amber-700 text-xl">2,5 Pts</span></div>
+                            <table class="methodology-table"><tbody><tr><td>Índice ≥ 0.5</td><td>2,5 pts</td></tr><tr><td>Índice 0.3 - 0.49</td><td>1,5 pts</td></tr><tr><td>Índice 0.1 - 0.29</td><td>0,5 pts</td></tr><tr><td>Índice < 0.1</td><td>0 pts</td></tr></tbody></table>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-md lg:order-1">
+                        <h3 class="font-bold text-lg text-center mb-4 text-slate-800">Distribuição de Pontos no Eixo</h3>
+                        <div class="chart-container"><canvas id="eixo4Chart"></canvas></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="text-center mt-16 py-8 border-t border-slate-200">
+            <p class="text-slate-500">Este painel é uma ferramenta para promover a transparência e a melhoria contínua na gestão orçamentária.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            const wrapLabel = (str, maxWidth) => {
+                if (str.length <= maxWidth) return str;
+                const words = str.split(' ');
+                let lines = [];
+                let currentLine = words[0];
+                for (let i = 1; i < words.length; i++) {
+                    if (currentLine.length + words[i].length + 1 < maxWidth) {
+                        currentLine += ' ' + words[i];
+                    } else {
+                        lines.push(currentLine);
+                        currentLine = words[i];
+                    }
+                }
+                lines.push(currentLine);
+                return lines;
+            };
+            
+            const tooltipTitleCallback = (tooltipItems) => {
+                const item = tooltipItems[0];
+                if (!item) return '';
+                let label = item.chart.data.labels[item.dataIndex];
+                return Array.isArray(label) ? label.join(' ') : label;
+            };
+
+            const defaultChartOptions = (color) => ({
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            font: { size: 12, family: 'Inter' },
+                            color: '#475569',
+                            boxWidth: 15,
+                            padding: 20,
+                        }
+                    },
+                    tooltip: {
+                        callbacks: { title: tooltipTitleCallback },
+                        backgroundColor: '#1e293b',
+                        titleFont: { size: 14, weight: 'bold', family: 'Inter' },
+                        bodyFont: { size: 12, family: 'Inter' },
+                        padding: 10,
+                        cornerRadius: 4,
+                    }
+                }
+            });
+            
+            const eixo1Data = {
+                labels: ['1.1 Empenho s/ Dotação', '1.2 Liquidação s/ Dotação', '1.3 Liquidação s/ Empenhos'],
+                datasets: [{ data: [8, 9, 8], backgroundColor: ['#2563eb', '#3b82f6', '#60a5fa'], borderColor: '#f8fafc', borderWidth: 4 }]
+            };
+            new Chart(document.getElementById('eixo1Chart').getContext('2d'), { type: 'doughnut', data: eixo1Data, options: defaultChartOptions() });
+
+            const eixo2Data = {
+                labels: ['2.1 Expansão Orçamentária', '2.2 Execução do Superávit', '2.3 Evitabilidade de Créditos'],
+                datasets: [{ data: [8, 8, 9], backgroundColor: ['#7c3aed', '#9333ea', '#a855f7'], borderColor: '#f8fafc', borderWidth: 4 }]
+            };
+            new Chart(document.getElementById('eixo2Chart').getContext('2d'), { type: 'doughnut', data: eixo2Data, options: defaultChartOptions() });
+
+            const eixo3Data = {
+                labels: [wrapLabel('3.1 Inscrição em RAP', 20), wrapLabel('3.2 Cancelamento de RAP', 20), wrapLabel('3.3 Pagamento de RAP', 20), wrapLabel('3.4 Impacto de DEA', 20)],
+                datasets: [{ data: [8, 4, 8, 5], backgroundColor: ['#0d9488', '#14b8a6', '#2dd4bf', '#5eead4'], borderColor: '#f8fafc', borderWidth: 4 }]
+            };
+            new Chart(document.getElementById('eixo3Chart').getContext('2d'), { type: 'doughnut', data: eixo3Data, options: defaultChartOptions() });
+
+            const eixo4Data = {
+                labels: [wrapLabel('4.1 Pressão s/ Tesouro', 20), wrapLabel('4.2 Conformidade LME', 20), wrapLabel('4.3 Remanejamento Interno', 20), wrapLabel('4.4 Execução Rec. Próprios', 20), wrapLabel('4.5 Independência Financeira', 20)],
+                datasets: [{ label: 'Pontos', data: [10, 5, 5, 2.5, 2.5], backgroundColor: ['#d97706', '#f59e0b', '#facc15', '#fde047', '#fef08a'], borderRadius: 4 }]
+            };
+            new Chart(document.getElementById('eixo4Chart').getContext('2d'), {
+                type: 'bar',
+                data: eixo4Data,
+                options: {
+                    ...defaultChartOptions(),
+                    indexAxis: 'y',
+                    plugins: { ...defaultChartOptions().plugins, legend: { display: false } },
+                    scales: {
+                        x: { beginAtZero: true, grid: { drawOnChartArea: false }, ticks: { color: '#64748b' } },
+                        y: { grid: { display: false }, ticks: { color: '#475569' } }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
